@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROSALAND | Bouquets de fleurs</title>
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;font-family:Arial,sans-serif;
+      background:radial-gradient(circle at 10% 10%,#ffdbe8 0 3px,transparent 4px) 0 0/32px 32px,#fff7fa;
+      color:#3b3035;
+    }
+    .hero{
+      padding:46px 20px 34px;text-align:center;
+      background:linear-gradient(135deg,#ffd9e6,#fff8fb);
+      border-bottom-left-radius:32px;border-bottom-right-radius:32px;
+    }
+    .hero .flower{font-size:34px}
+    .hero h1{margin:8px 0 0;font-size:44px;letter-spacing:6px;color:#b43d68}
+    .hero p{font-size:18px;margin:10px 0 0;color:#72525f}
+    .container{max-width:650px;margin:auto;padding:20px}
+    .card{
+      background:white;border-radius:22px;padding:22px;margin:15px 0;
+      box-shadow:0 8px 25px rgba(150,70,100,.10);
+    }
+    .prices h2{text-align:center;color:#b43d68}
+    .price{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:17px 8px;border-bottom:1px solid #f3dfe6;font-size:18px;
+    }
+    .price span:first-child{font-weight:600}
+    .price strong{font-size:20px}
+    .price:last-child{border-bottom:0}
+    .price strong{color:#b43d68}
+    label{display:block;font-weight:bold;margin:13px 0 7px}
+    input,select,textarea{
+      width:100%;padding:13px;border:1px solid #e5cbd5;border-radius:12px;
+      font-size:16px;background:#fff;
+    }
+    textarea{min-height:80px;resize:vertical}
+    button{
+      width:100%;padding:15px;border:0;border-radius:14px;
+      background:#b43d68;color:white;font-size:18px;font-weight:bold;
+      margin-top:18px;cursor:pointer;
+    }
+    button:hover{opacity:.9}
+    .note{text-align:center;font-size:13px;color:#7b6970;margin-top:12px}
+    .success{
+      display:none;text-align:center;background:#fff0f5;border-radius:16px;
+      padding:15px;margin-top:14px;color:#8d3155;font-weight:bold;
+    }
+    .whatsapp{
+      display:block;text-align:center;margin-top:12px;color:#b43d68;
+      text-decoration:none;font-weight:bold;
+    }
+    footer{text-align:center;padding:25px;color:#8b727b}
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="flower">🌷 🌸 🌷</div>
+    <h1>ROSALAND</h1>
+    <p>Bouquets de fleurs 💐</p>
+  </section>
+
+  <main class="container">
+    <section class="card prices">
+      <h2>Nos prix</h2>
+      <div class="price"><span>🌷 3 fleurs</span><strong>800 DA</strong></div>
+      <div class="price"><span>🌷 6 fleurs</span><strong>1600 DA</strong></div>
+      <div class="price"><span>🌷 10 fleurs</span><strong>2500 DA</strong></div>
+      <div class="price"><span>🌷 14 fleurs</span><strong>3500 DA</strong></div>
+    </section>
+
+    <section class="card">
+      <h2>Commander votre bouquet 💐</h2>
+      <form id="orderForm">
+        <label for="name">Nom et prénom</label>
+        <input id="name" required placeholder="Votre nom et prénom">
+
+        <label for="phone">Numéro de téléphone</label>
+        <input id="phone" type="tel" required placeholder="05 / 06 / 07 ...">
+
+        <label for="wilaya">Wilaya</label>
+        <select id="wilaya" required>
+          <option value="">Choisissez votre wilaya</option>
+          <option>Alger</option><option>Béjaïa</option><option>Bouira</option>
+          <option>Boumerdès</option><option>Blida</option><option>Oran</option>
+          <option>Sétif</option><option>Constantine</option><option>Annaba</option>
+          <option>Tizi Ouzou</option><option>Jijel</option><option>Batna</option>
+          <option>Autre wilaya</option>
+        </select>
+
+        <label for="address">Adresse complète</label>
+        <input id="address" required placeholder="Commune, quartier, rue...">
+
+        <label for="bouquet">Bouquet souhaité</label>
+        <select id="bouquet" required>
+          <option value="">Choisissez un bouquet</option>
+          <option value="3 fleurs — 800 DA">3 fleurs — 800 DA</option>
+          <option value="6 fleurs — 1600 DA">6 fleurs — 1600 DA</option>
+          <option value="10 fleurs — 2500 DA">10 fleurs — 2500 DA</option>
+          <option value="14 fleurs — 3500 DA">14 fleurs — 3500 DA</option>
+        </select>
+
+        <label for="quantity">Quantité</label>
+        <input id="quantity" type="number" min="1" value="1" required>
+
+        <label for="note">Message / remarque (facultatif)</label>
+        <textarea id="note" placeholder="Couleur, occasion, heure de livraison..."></textarea>
+
+        <button type="submit">📲 Confirmer ma commande</button>
+        <div id="success" class="success">✅ Votre commande est prête à être envoyée sur WhatsApp.</div>
+        <a class="whatsapp" href="https://wa.me/213552767910" target="_blank">💬 Contacter ROSALAND sur WhatsApp</a>
+        <div class="note">Paiement à la livraison • Nous vous contacterons pour confirmer.</div>
+      </form>
+    </section>
+  </main>
+
+  <footer>ROSALAND • Bouquets de fleurs</footer>
+
+  <script>
+    document.getElementById("orderForm").addEventListener("submit", async function(e){
+      e.preventDefault();
+
+      const button = this.querySelector("button");
+      button.disabled = true;
+      button.textContent = "⏳ Envoi de la commande...";
+
+      const data = {
+        name: document.getElementById("name").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        wilaya: document.getElementById("wilaya").value,
+        address: document.getElementById("address").value.trim(),
+        bouquet: document.getElementById("bouquet").value,
+        quantity: document.getElementById("quantity").value,
+        note: document.getElementById("note").value.trim()
+      };
+
+      try {
+        const response = await fetch("/.netlify/functions/send-order", {
+          method: "POST",
+          headers: {"Content-Type":"application/json"},
+          body: JSON.stringify(data)
+        });
+
+        if (!response.ok) throw new Error("send failed");
+
+        document.getElementById("success").style.display = "block";
+        document.getElementById("success").textContent =
+          "✅ Commande envoyée ! Nous allons vous contacter pour confirmation.";
+        this.reset();
+        document.getElementById("quantity").value = 1;
+        updateTotal();
+      } catch (err) {
+        alert("❌ Impossible d'envoyer la commande. Réessayez dans quelques instants.");
+      } finally {
+        button.disabled = false;
+        button.textContent = "📲 Confirmer ma commande";
+      }
+    });
+
+    const bouquetSelect = document.getElementById("bouquet");
+    const quantityInput = document.getElementById("quantity");
+    const totalBox = document.createElement("div");
+    totalBox.style.cssText = "margin-top:14px;text-align:center;font-size:18px;font-weight:bold;color:#b43d68;";
+    totalBox.id = "totalBox";
+    document.getElementById("quantity").insertAdjacentElement("afterend", totalBox);
+
+    function updateTotal(){
+      const prices = {
+        "3 fleurs — 800 DA":800,
+        "6 fleurs — 1600 DA":1600,
+        "10 fleurs — 2500 DA":2500,
+        "14 fleurs — 3500 DA":3500
+      };
+      const p = prices[bouquetSelect.value] || 0;
+      const q = Math.max(1, parseInt(quantityInput.value || 1));
+      totalBox.textContent = p ? "Total : " + (p*q) + " DA" : "";
+    }
+    bouquetSelect.addEventListener("change", updateTotal);
+    quantityInput.addEventListener("input", updateTotal);
+  </script>
+</body>
+</html>
